@@ -14,6 +14,7 @@ class Article extends Component {
     render() {
         const { article } = this.props
         const body = this.state.isOpen ? <p>{article.text}</p> : null
+            //у тебя это работает? по идее этот кусок всегда null должен быть?
             ? (
                 <div>
                     <p>{ article.text }</p>

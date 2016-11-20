@@ -13,6 +13,7 @@ class CommentList extends Component {
     render() {
         const { comments } = this.props
         let commentsBlock = null;
+        //лучше сразу сделай return null, избавишся от одного уровня вложенности в коде
         if (comments) {
             const toggleText = (this.state.isOpen ? 'Close' : 'Open') + ' comments'
             const commentItems = comments.map(comment => <Comment key={comment.id} comment={comment} />)

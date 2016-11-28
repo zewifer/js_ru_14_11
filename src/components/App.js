@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import ArticleList from './ArticleList'
-import Select from 'react-select'
-import Chart from './Chart'
-import 'react-select/dist/react-select.css'
+import Filter from './Filter'
 
 class App extends Component {
     static propTypes = {
@@ -10,24 +8,28 @@ class App extends Component {
     };
 
     state = {
+        dateRange: {
+            from: null,
+            to: null
+        },
         selected: null
     }
 
     render() {
+        const { dateRange, selected } = this.state
         const options = this.props.articles.map(article => ({
             label: article.title,
             value: article.id
         }))
         return (
             <div>
-                <Chart />
-                <ArticleList articles={this.props.articles} />
-                <Select options = {options} value = {this.state.selected} onChange = {this.handleChange} multi = {true}/>
+                <Filter options = {options} filters = {{ dateRange, selected }} filterChange = {this.handleFilterChange} />
+                <ArticleList articles = {this.props.articles} />
             </div>
         )
     }
 
-    handleChange = selected => this.setState({ selected })
+    handleFilterChange = (filter) => this.setState(filter)
 }
 
 export default App
